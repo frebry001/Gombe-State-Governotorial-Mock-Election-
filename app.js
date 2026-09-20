@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!lgaSelect || !wardSelect || !puSelect) return;
 
-  // Loda LGAs
+  // 1. Cika sunayen LGAs a farko
   Object.keys(gombeData).forEach(lga => {
     const option = document.createElement('option');
     option.value = lga;
@@ -85,11 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
     lgaSelect.appendChild(option);
   });
 
-  // Sauya LGA
+  // 2. Idan an sauya LGA
   lgaSelect.addEventListener('change', (e) => {
     const selectedLGA = e.target.value;
     wardSelect.innerHTML = '<option value="">-- Zaɓi Ward --</option>';
     puSelect.innerHTML = '<option value="">-- Fara zaɓar Ward --</option>';
+    wardSelect.disabled = true;
     puSelect.disabled = true;
 
     if (selectedLGA && gombeData[selectedLGA]) {
@@ -100,17 +101,15 @@ document.addEventListener('DOMContentLoaded', () => {
         option.textContent = ward;
         wardSelect.appendChild(option);
       });
-    } else {
-      wardSelect.disabled = true;
-      wardSelect.innerHTML = '<option value="">-- Fara zaɓar LGA --</option>';
     }
   });
 
-  // Sauya Ward
+  // 3. Idan an sauya Ward
   wardSelect.addEventListener('change', (e) => {
     const selectedLGA = lgaSelect.value;
     const selectedWard = e.target.value;
     puSelect.innerHTML = '<option value="">-- Zaɓi Polling Unit --</option>';
+    puSelect.disabled = true;
 
     if (selectedWard && gombeData[selectedLGA] && gombeData[selectedLGA][selectedWard]) {
       puSelect.disabled = false;
@@ -120,24 +119,32 @@ document.addEventListener('DOMContentLoaded', () => {
         option.textContent = pu;
         puSelect.appendChild(option);
       });
-    } else {
-      puSelect.disabled = true;
-      puSelect.innerHTML = '<option value="">-- Fara zaɓar Ward --</option>';
     }
   });
 
-  // Kunna hanyar wucewa ta maballi (Buttons)
-  document.querySelectorAll('button').forEach(btn => {
+  // 4. Tsarin tafiya daga shafi zuwa shafi (Navigation)
+  let currentIdx = 0;
+  // Boye duk section din da suka wuce na farko
+  sections.forEach((sec, idx) => {
+    if (idx !== 0) sec.style.display = 'none';
+  });
+
+  document.querySelectorAll('button, .btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      // Tabbatar an zaɓi dukkan filaye gabanin tsallakawa
-      if (lgaSelect.value && wardSelect.value && puSelect.value) {
-        let currentSection = btn.closest('section');
-        if (currentSection && currentSection.nextElementSibling) {
-          currentSection.style.display = 'none';
-          currentSection.nextElementSibling.style.display = 'block';
+      e.preventDefault();
+      
+      // Idan muna kan matakin da ake bukatan zaɓen LGA/Ward/PU (Misali section na 2)
+      if (currentIdx === 1) {
+        if (!lgaSelect.value || !wardSelect.value || !puSelect.value) {
+          alert("Don Allah cika LGA, Ward, da Polling Unit kafin ka ci gaba!");
+          return;
         }
-      } else {
-        alert("Cika dukkan zabubbuka (LGA, Ward, da Polling Unit) kafin ka ci gaba!");
+      }
+
+      if (currentIdx < sections.length - 1) {
+        sections[currentIdx].style.display = 'none';
+        currentIdx++;
+        sections[currentIdx].style.display = 'block';
       }
     });
   });
