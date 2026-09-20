@@ -69,83 +69,84 @@ const gombeData = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  const selects = document.querySelectorAll('select');
-  const lgaSelect = selects[0];
-  const wardSelect = selects[1];
-  const puSelect = selects[2];
-  const sections = document.querySelectorAll('section');
+  const step0 = document.getElementById('step-0');
+  const step1 = document.getElementById('step-1');
+  const step2 = document.getElementById('step-2');
+  const step3 = document.getElementById('step-3');
 
-  if (!lgaSelect || !wardSelect || !puSelect) return;
+  const startBtn = document.getElementById('start-btn');
+  const nextBtn = document.getElementById('next-to-candidates-btn');
+  const submitBtn = document.getElementById('submit-vote-btn');
 
-  // 1. Cika sunayen LGAs a farko
+  const lgaSelect = document.getElementById('lga-select');
+  const wardSelect = document.getElementById('ward-select');
+  const puSelect = document.getElementById('pu-select');
+  const summaryText = document.getElementById('summary-text');
+
   Object.keys(gombeData).forEach(lga => {
-    const option = document.createElement('option');
-    option.value = lga;
-    option.textContent = lga;
-    lgaSelect.appendChild(option);
+    const opt = document.createElement('option');
+    opt.value = lga;
+    opt.textContent = lga;
+    lgaSelect.appendChild(opt);
   });
 
-  // 2. Idan an sauya LGA
+  startBtn.addEventListener('click', () => {
+    step0.style.display = 'none';
+    step1.style.display = 'block';
+  });
+
   lgaSelect.addEventListener('change', (e) => {
-    const selectedLGA = e.target.value;
+    const val = e.target.value;
     wardSelect.innerHTML = '<option value="">-- Zaɓi Ward --</option>';
     puSelect.innerHTML = '<option value="">-- Fara zaɓar Ward --</option>';
     wardSelect.disabled = true;
     puSelect.disabled = true;
 
-    if (selectedLGA && gombeData[selectedLGA]) {
+    if (val && gombeData[val]) {
       wardSelect.disabled = false;
-      Object.keys(gombeData[selectedLGA]).forEach(ward => {
-        const option = document.createElement('option');
-        option.value = ward;
-        option.textContent = ward;
-        wardSelect.appendChild(option);
+      Object.keys(gombeData[val]).forEach(ward => {
+        const opt = document.createElement('option');
+        opt.value = ward;
+        opt.textContent = ward;
+        wardSelect.appendChild(opt);
       });
     }
   });
 
-  // 3. Idan an sauya Ward
   wardSelect.addEventListener('change', (e) => {
-    const selectedLGA = lgaSelect.value;
-    const selectedWard = e.target.value;
+    const lga = lgaSelect.value;
+    const ward = e.target.value;
     puSelect.innerHTML = '<option value="">-- Zaɓi Polling Unit --</option>';
     puSelect.disabled = true;
 
-    if (selectedWard && gombeData[selectedLGA] && gombeData[selectedLGA][selectedWard]) {
+    if (ward && gombeData[lga] && gombeData[lga][ward]) {
       puSelect.disabled = false;
-      gombeData[selectedLGA][selectedWard].forEach(pu => {
-        const option = document.createElement('option');
-        option.value = pu;
-        option.textContent = pu;
-        puSelect.appendChild(option);
+      gombeData[lga][ward].forEach(pu => {
+        const opt = document.createElement('option');
+        opt.value = pu;
+        opt.textContent = pu;
+        puSelect.appendChild(opt);
       });
     }
   });
 
-  // 4. Tsarin tafiya daga shafi zuwa shafi (Navigation)
-  let currentIdx = 0;
-  // Boye duk section din da suka wuce na farko
-  sections.forEach((sec, idx) => {
-    if (idx !== 0) sec.style.display = 'none';
+  nextBtn.addEventListener('click', () => {
+    if (!lgaSelect.value || !wardSelect.value || !puSelect.value) {
+      alert("Don Allah cika LGA, Ward, da Polling Unit kafin ka ci gaba!");
+      return;
+    }
+    step1.style.display = 'none';
+    step2.style.display = 'block';
   });
 
-  document.querySelectorAll('button, .btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      // Idan muna kan matakin da ake bukatan zaɓen LGA/Ward/PU (Misali section na 2)
-      if (currentIdx === 1) {
-        if (!lgaSelect.value || !wardSelect.value || !puSelect.value) {
-          alert("Don Allah cika LGA, Ward, da Polling Unit kafin ka ci gaba!");
-          return;
-        }
-      }
-
-      if (currentIdx < sections.length - 1) {
-        sections[currentIdx].style.display = 'none';
-        currentIdx++;
-        sections[currentIdx].style.display = 'block';
-      }
-    });
+  submitBtn.addEventListener('click', () => {
+    const selectedCandidate = document.querySelector('input[name="candidate"]:checked');
+    if (!selectedCandidate) {
+      alert("Don Allah zaɓi ɗan takara guda ɗaya!");
+      return;
+    }
+    step2.style.display = 'none';
+    step3.style.display = 'block';
+    summaryText.innerHTML = `Mungode! Ka ƙada ƙuri'arka ga <strong>${selectedCandidate.value}</strong> daga ƙaramar hukumar <strong>${lgaSelect.value}</strong>.`;
   });
 });
