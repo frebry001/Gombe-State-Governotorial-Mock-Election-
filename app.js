@@ -1,142 +1,136 @@
-const data = {
-  "Akko": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
-  },
-  "Balanga": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
-  },
-  "Billiri": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
-  },
-  "Dukku": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
-  },
-  "Funakaye": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
-  },
+// Data na LGAs, Wards da Polling Units na Jihar Gombe
+const gombeData = {
   "Gombe": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
+    "Buruya / Herwagana": ["PU 001 - Central Primary School", "PU 002 - Herwagana Dispensary", "PU 003 - Open Space Market"],
+    "Jekadafari": ["PU 001 - Jekadafari Pri. Sch.", "PU 002 - Kofar Sarki", "PU 003 - Yada Gungume"],
+    "Nasarawa": ["PU 001 - Nasarawa Pri. Sch.", "PU 002 - Kofar Mai Unguwa"],
+    "Bolari East": ["PU 001 - Bolari Pri. Sch.", "PU 002 - Open Space Park"],
+    "Bolari West": ["PU 001 - West Pri. Sch.", "PU 002 - Kofar Hakimi"],
+    "Kombani": ["PU 001 - Kombani Pri. Sch.", "PU 002 - Health Clinic"]
   },
-  "Kaltungo": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
-  },
-  "Kwami": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
-  },
-  "Nafada": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
-  },
-  "Shongom": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
+  "Akko": {
+    "Kumo East": ["PU 001 - Kumo Central Pri. Sch.", "PU 002 - Kofar Sarkin Kumo"],
+    "Kumo West": ["PU 001 - West Pri. Sch.", "PU 002 - Dispensary"],
+    "Akko": ["PU 001 - Akko Pri. Sch.", "PU 002 - Open Space"],
+    "Pindiga": ["PU 001 - Pindiga Central Pri. Sch.", "PU 002 - Kofar Emir"],
+    "Gona": ["PU 001 - Gona Pri. Sch.", "PU 002 - Market Area"]
   },
   "Yamaltu/Deba": {
-    "Ward 1": ["Area 1", "Area 2"],
-    "Ward 2": ["Area 3", "Area 4"]
+    "Deba": ["PU 001 - Deba Central School", "PU 002 - Kofar Sarki"],
+    "Yamaltu": ["PU 001 - Yamaltu Pri. Sch.", "PU 002 - Health Centre"],
+    "Lawa": ["PU 001 - Lawa Pri. Sch.", "PU 002 - Open Space"],
+    "Hinna": ["PU 001 - Hinna Central Pri. Sch.", "PU 002 - Market Square"]
+  },
+  "Kaltungo": {
+    "Kaltungo West": ["PU 001 - Kaltungo Central School", "PU 002 - Kofar Mai Kaltungo"],
+    "Kaltungo East": ["PU 001 - East Pri. Sch.", "PU 002 - Town Hall"],
+    "Awogu": ["PU 001 - Awogu Pri. Sch.", "PU 002 - Dispensary"],
+    "Ture": ["PU 001 - Ture Pri. Sch.", "PU 002 - Open Space"]
+  },
+  "Billiri": {
+    "Billiri North": ["PU 001 - Central Primary School", "PU 002 - Kofar Mai"],
+    "Billiri South": ["PU 001 - South Pri. Sch.", "PU 002 - Market Square"],
+    "Bare": ["PU 001 - Bare Pri. Sch.", "PU 002 - Health Post"],
+    "Tanglang": ["PU 001 - Tanglang Pri. Sch.", "PU 002 - Open Space"]
+  },
+  "Dukku": {
+    "Dukku North": ["PU 001 - Dukku Central Pri. Sch.", "PU 002 - Kofar Emir"],
+    "Dukku South": ["PU 001 - South Pri. Sch.", "PU 002 - Market Area"],
+    "Zaune": ["PU 001 - Zaune Pri. Sch.", "PU 002 - Health Clinic"],
+    "Jamari": ["PU 001 - Jamari Pri. Sch.", "PU 002 - Kofar Mai Unguwa"]
+  },
+  "Funakaye": {
+    "Bajoga East": ["PU 001 - Bajoga Central Pri. Sch.", "PU 002 - Kofar Hakimi"],
+    "Bajoga West": ["PU 001 - West Pri. Sch.", "PU 002 - Market Square"],
+    "Ashaka": ["PU 001 - Ashaka Pri. Sch.", "PU 002 - Club House Area"],
+    "Tilde": ["PU 001 - Tilde Pri. Sch.", "PU 002 - Dispensary"]
+  },
+  "Balanga": {
+    "Talasse": ["PU 001 - Central Pri. Sch.", "PU 002 - Kofar Hakimi"],
+    "Bambam": ["PU 001 - Bambam Pri. Sch.", "PU 002 - Market Area"],
+    "Nyuwar": ["PU 001 - Nyuwar Pri. Sch.", "PU 002 - Open Space"],
+    "Gelengu": ["PU 001 - Gelengu Pri. Sch.", "PU 002 - Health Post"]
+  },
+  "Nafada": {
+    "Nafada Central": ["PU 001 - Nafada Pri. Sch.", "PU 002 - Kofar Emir"],
+    "Barwo": ["PU 001 - Barwo Pri. Sch.", "PU 002 - Open Space"],
+    "Jigawa": ["PU 001 - Jigawa Pri. Sch.", "PU 002 - Health Clinic"]
+  },
+  "Shongom": {
+    "Lalaipido": ["PU 001 - Central Pri. Sch.", "PU 002 - Market Square"],
+    "Filiya": ["PU 001 - Filiya Pri. Sch.", "PU 002 - Kofar Hakimi"],
+    "Gundale": ["PU 001 - Gundale Pri. Sch.", "PU 002 - Dispensary"]
+  },
+  "Kwami": {
+    "Kwami": ["PU 001 - Kwami Central Pri. Sch.", "PU 002 - Kofar Sarki"],
+    "Mallam Sidi": ["PU 001 - Mallam Sidi Pri. Sch.", "PU 002 - Market Area"],
+    "Doho": ["PU 001 - Doho Pri. Sch.", "PU 002 - Health Post"],
+    "Bojude": ["PU 001 - Bojude Pri. Sch.", "PU 002 - Open Space"]
   }
 };
 
-const lga = document.getElementById("lga");
-const ward = document.getElementById("ward");
-const area = document.getElementById("area");
-const startBtn = document.getElementById("startBtn");
-const submitBtn = document.getElementById("submitBtn");
-const againBtn = document.getElementById("againBtn");
-const pollSection = document.getElementById("pollSection");
-const resultSection = document.getElementById("resultSection");
-const message = document.getElementById("message");
-const summary = document.getElementById("summary");
-const stepNo = document.getElementById("stepNo");
+// Jerin 'Yan Takarar Gwamna na 2027 da Jam'iyyonsu
+const candidates = [
+  { party: "APC", name: "Dr. Jamilu Isyaku Gwamna" },
+  { party: "PDP", name: "Prof. Isa Ali Ibrahim Pantami" },
+  { party: "ADC", name: "Bala Bello" }
+];
 
-Object.keys(data).forEach(name => {
-  const option = document.createElement("option");
-  option.value = name;
-  option.textContent = name;
-  lga.appendChild(option);
-});
+document.addEventListener('DOMContentLoaded', () => {
+  const lgaSelect = document.querySelectorAll('select')[0];
+  const wardSelect = document.querySelectorAll('select')[1];
+  const puSelect = document.querySelectorAll('select')[2];
 
-function fillSelect(select, items, placeholder) {
-  select.innerHTML = `<option value="">${placeholder}</option>`;
-  items.forEach(item => {
-    const option = document.createElement("option");
-    option.value = item;
-    option.textContent = item;
-    select.appendChild(option);
+  if (!lgaSelect || !wardSelect || !puSelect) return;
+
+  // Loda LGAs zuwa menu na 1
+  Object.keys(gombeData).forEach(lga => {
+    const option = document.createElement('option');
+    option.value = lga;
+    option.textContent = lga;
+    lgaSelect.appendChild(option);
   });
-}
 
-function updateStep() {
-  let step = 1;
-  if (lga.value) step = 2;
-  if (ward.value) step = 3;
-  if (area.value) step = 4;
-  stepNo.textContent = step;
-}
+  // Idan an zaɓi LGA
+  lgaSelect.addEventListener('change', (e) => {
+    const selectedLGA = e.target.value;
+    
+    wardSelect.innerHTML = '<option value="">-- Zaɓi Ward --</option>';
+    puSelect.innerHTML = '<option value="">-- Fara zaɓar Ward --</option>';
+    puSelect.disabled = true;
 
-startBtn.addEventListener("click", () => {
-  pollSection.classList.remove("hidden");
-  resultSection.classList.add("hidden");
-  startBtn.textContent = "SAKE FARA ZAƁEN GWAJI";
-  pollSection.scrollIntoView({behavior:"smooth"});
-});
+    if (selectedLGA && gombeData[selectedLGA]) {
+      wardSelect.disabled = false;
+      Object.keys(gombeData[selectedLGA]).forEach(ward => {
+        const option = document.createElement('option');
+        option.value = ward;
+        option.textContent = ward;
+        wardSelect.appendChild(option);
+      });
+    } else {
+      wardSelect.disabled = true;
+      wardSelect.innerHTML = '<option value="">-- Fara zaɓar LGA --</option>';
+    }
+  });
 
-lga.addEventListener("change", () => {
-  const wards = lga.value ? Object.keys(data[lga.value]) : [];
-  fillSelect(ward, wards, wards.length ? "-- Zaɓi Ward --" : "-- Fara zaɓar LGA --");
-  fillSelect(area, [], "-- Fara zaɓar Ward --");
-  ward.disabled = !lga.value;
-  area.disabled = true;
-  message.textContent = "";
-  updateStep();
-});
+  // Idan an zaɓi Ward
+  wardSelect.addEventListener('change', (e) => {
+    const selectedLGA = lgaSelect.value;
+    const selectedWard = e.target.value;
 
-ward.addEventListener("change", () => {
-  const areas = lga.value && ward.value ? data[lga.value][ward.value] : [];
-  fillSelect(area, areas, areas.length ? "-- Zaɓi Area / Unguwa --" : "-- Fara zaɓar Ward --");
-  area.disabled = !ward.value;
-  message.textContent = "";
-  updateStep();
-});
+    puSelect.innerHTML = '<option value="">-- Zaɓi Polling Unit --</option>';
 
-area.addEventListener("change", updateStep);
-
-submitBtn.addEventListener("click", () => {
-  const selected = document.querySelector('input[name="candidate"]:checked');
-
-  if (!lga.value || !ward.value || !area.value || !selected) {
-    message.textContent = "Da fatan zaɓi LGA, Ward, Area da zaɓinka kafin ka tura.";
-    message.style.color = "#b42318";
-    return;
-  }
-
-  message.textContent = "";
-  summary.textContent =
-    `LGA: ${lga.value} • Ward: ${ward.value} • Area: ${area.value} • Zaɓi: ${selected.value}`;
-
-  pollSection.classList.add("hidden");
-  resultSection.classList.remove("hidden");
-  resultSection.scrollIntoView({behavior:"smooth"});
-});
-
-againBtn.addEventListener("click", () => {
-  document.querySelectorAll('input[name="candidate"]').forEach(r => r.checked = false);
-  lga.value = "";
-  fillSelect(ward, [], "-- Fara zaɓar LGA --");
-  fillSelect(area, [], "-- Fara zaɓar Ward --");
-  ward.disabled = true;
-  area.disabled = true;
-  message.textContent = "";
-  updateStep();
-  resultSection.classList.add("hidden");
-  pollSection.classList.remove("hidden");
-  pollSection.scrollIntoView({behavior:"smooth"});
+    if (selectedWard && gombeData[selectedLGA] && gombeData[selectedLGA][selectedWard]) {
+      puSelect.disabled = false;
+      gombeData[selectedLGA][selectedWard].forEach(pu => {
+        const option = document.createElement('option');
+        option.value = pu;
+        option.textContent = pu;
+        puSelect.appendChild(option);
+      });
+    } else {
+      puSelect.disabled = true;
+      puSelect.innerHTML = '<option value="">-- Fara zaɓar Ward --</option>';
+    }
+  });
 });
