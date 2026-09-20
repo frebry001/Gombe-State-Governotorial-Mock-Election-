@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ha">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gombe Mock Poll 2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div class="badge">GOMBE STATE</div>
+      <h1>Gombe Mock Poll 2026</h1>
+      <p>Zaɓen gwaji ne domin tattara ra'ayi. Ba zaɓen INEC na hukuma ba.</p>
+      <button id="startBtn" class="primary">FARA ZAƁEN GWAJI</button>
+    </section>
+
+    <section id="pollSection" class="card hidden">
+      <div class="step">MATAKI <span id="stepNo">1</span> / 4</div>
+
+      <label for="lga">1. Zaɓi Local Government Area</label>
+      <select id="lga">
+        <option value="">-- Zaɓi LGA --</option>
+      </select>
+
+      <label for="ward">2. Zaɓi Ward / Registration Area</label>
+      <select id="ward" disabled>
+        <option value="">-- Fara zaɓar LGA --</option>
+      </select>
+
+      <label for="area">3. Zaɓi Area / Unguwa</label>
+      <select id="area" disabled>
+        <option value="">-- Fara zaɓar Ward --</option>
+      </select>
+
+      <div id="candidateBox" class="candidate-box">
+        <label>4. Zaɓi zaɓinka</label>
+        <label class="option"><input type="radio" name="candidate" value="Option A"> <span>Option A</span></label>
+        <label class="option"><input type="radio" name="candidate" value="Option B"> <span>Option B</span></label>
+        <label class="option"><input type="radio" name="candidate" value="Option C"> <span>Option C</span></label>
+      </div>
+
+      <button id="submitBtn" class="primary">TURA ZAƁE</button>
+      <p id="message" class="message"></p>
+    </section>
+
+    <section id="resultSection" class="card hidden">
+      <div class="success">✓</div>
+      <h2>An karɓi zaɓen gwajin ka</h2>
+      <p id="summary"></p>
+      <button id="againBtn" class="secondary">SAKE GWADAWA</button>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
