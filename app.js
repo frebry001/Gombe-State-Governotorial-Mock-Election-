@@ -1,4 +1,3 @@
-// Data na LGAs, Wards da Polling Units na Jihar Gombe
 const gombeData = {
   "Gombe": {
     "Buruya / Herwagana": ["PU 001 - Central Primary School", "PU 002 - Herwagana Dispensary", "PU 003 - Open Space Market"],
@@ -69,21 +68,16 @@ const gombeData = {
   }
 };
 
-// Jerin 'Yan Takarar Gwamna na 2027 da Jam'iyyonsu
-const candidates = [
-  { party: "APC", name: "Dr. Jamilu Isyaku Gwamna" },
-  { party: "PDP", name: "Prof. Isa Ali Ibrahim Pantami" },
-  { party: "ADC", name: "Bala Bello" }
-];
-
 document.addEventListener('DOMContentLoaded', () => {
-  const lgaSelect = document.querySelectorAll('select')[0];
-  const wardSelect = document.querySelectorAll('select')[1];
-  const puSelect = document.querySelectorAll('select')[2];
+  const selects = document.querySelectorAll('select');
+  const lgaSelect = selects[0];
+  const wardSelect = selects[1];
+  const puSelect = selects[2];
+  const sections = document.querySelectorAll('section');
 
   if (!lgaSelect || !wardSelect || !puSelect) return;
 
-  // Loda LGAs zuwa menu na 1
+  // Loda LGAs
   Object.keys(gombeData).forEach(lga => {
     const option = document.createElement('option');
     option.value = lga;
@@ -91,10 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
     lgaSelect.appendChild(option);
   });
 
-  // Idan an zaɓi LGA
+  // Sauya LGA
   lgaSelect.addEventListener('change', (e) => {
     const selectedLGA = e.target.value;
-    
     wardSelect.innerHTML = '<option value="">-- Zaɓi Ward --</option>';
     puSelect.innerHTML = '<option value="">-- Fara zaɓar Ward --</option>';
     puSelect.disabled = true;
@@ -113,11 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Idan an zaɓi Ward
+  // Sauya Ward
   wardSelect.addEventListener('change', (e) => {
     const selectedLGA = lgaSelect.value;
     const selectedWard = e.target.value;
-
     puSelect.innerHTML = '<option value="">-- Zaɓi Polling Unit --</option>';
 
     if (selectedWard && gombeData[selectedLGA] && gombeData[selectedLGA][selectedWard]) {
@@ -132,5 +124,21 @@ document.addEventListener('DOMContentLoaded', () => {
       puSelect.disabled = true;
       puSelect.innerHTML = '<option value="">-- Fara zaɓar Ward --</option>';
     }
+  });
+
+  // Kunna hanyar wucewa ta maballi (Buttons)
+  document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // Tabbatar an zaɓi dukkan filaye gabanin tsallakawa
+      if (lgaSelect.value && wardSelect.value && puSelect.value) {
+        let currentSection = btn.closest('section');
+        if (currentSection && currentSection.nextElementSibling) {
+          currentSection.style.display = 'none';
+          currentSection.nextElementSibling.style.display = 'block';
+        }
+      } else {
+        alert("Cika dukkan zabubbuka (LGA, Ward, da Polling Unit) kafin ka ci gaba!");
+      }
+    });
   });
 });
